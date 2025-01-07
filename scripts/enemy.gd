@@ -15,11 +15,16 @@ func _ready():
 		"tank":
 			create_tank()
 
+
 func _process(delta):
 	position.x += speed * delta
+	
+	if health <= 0:
+		remove_from_group("enemiesGroup")
+		queue_free()
 
 func create_walker():
-	health = 10
+	health = 20
 	speed = 20
 	$Sprite2D.modulate = "#D72638"
 	

@@ -48,4 +48,6 @@ func shoot(dt):
 	timer += dt
 	if timer > fire_rate:
 		print("shoot: ", turret_type, " ", timer)
+		for enemy in get_tree().get_nodes_in_group("enemiesGroup"):
+			enemy.health -= damage
 		timer =  0
