@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_g3ea0"]
 [ext_resource type="Texture2D" uid="uid://duwdgy0rn3ttk" path="res://icon.svg" id="1_nwf02"]
 
-[node name="enemy" type="Node2D"]
+[node name="enemy" type="Node2D" groups=["enemiesGroup"]]
 script = ExtResource("1_g3ea0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://4hunt3gmuukc"]
+
+[ext_resource type="Script" path="res://scripts/turret.gd" id="1_7h5d8"]
+[ext_resource type="Texture2D" uid="uid://duwdgy0rn3ttk" path="res://icon.svg" id="2_roab6"]
+
+[node name="Turret" type="Node2D"]
+script = ExtResource("1_7h5d8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.0235294, 1, 0, 1)
+texture = ExtResource("2_roab6")
