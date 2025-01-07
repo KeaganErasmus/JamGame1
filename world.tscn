@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8sstqiscq7b2"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_vl3sp"]
+[ext_resource type="Texture2D" uid="uid://duwdgy0rn3ttk" path="res://icon.svg" id="2_pescv"]
+
+[node name="world" type="Node2D"]
+script = ExtResource("1_vl3sp")
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(557.5, 319.5)
+scale = Vector2(9.72656, 5.44531)
+texture = ExtResource("2_pescv")
+
+[node name="EnemySide" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 70.0
+offset_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="walker" type="Button" parent="EnemySide"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Walker"
+
+[node name="runner" type="Button" parent="EnemySide"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 2.0
+offset_right = 231.0
+offset_bottom = 42.0
+text = "Runner"
+
+[node name="tank" type="Button" parent="EnemySide"]
+layout_mode = 1
+offset_left = 81.0
+offset_top = 2.0
+offset_right = 151.0
+offset_bottom = 40.0
+text = "Tank"
+
+[node name="Label" type="Label" parent="EnemySide"]
+offset_left = 454.0
+offset_top = 2.0
+offset_right = 521.0
+offset_bottom = 25.0
+text = "current: "
+
+[node name="enemyHolder" type="Node2D" parent="."]
+
+[connection signal="pressed" from="EnemySide/walker" to="." method="_on_walker_pressed"]
+[connection signal="pressed" from="EnemySide/runner" to="." method="_on_runner_pressed"]
+[connection signal="pressed" from="EnemySide/tank" to="." method="_on_tank_pressed"]
