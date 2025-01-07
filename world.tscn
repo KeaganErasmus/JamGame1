@@ -1,14 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8sstqiscq7b2"]
+[gd_scene load_steps=4 format=3 uid="uid://b8sstqiscq7b2"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_vl3sp"]
 [ext_resource type="Texture2D" uid="uid://duwdgy0rn3ttk" path="res://icon.svg" id="2_pescv"]
+[ext_resource type="PackedScene" uid="uid://4hunt3gmuukc" path="res://scenes/turret.tscn" id="3_eiw1n"]
 
 [node name="world" type="Node2D"]
 script = ExtResource("1_vl3sp")
 
 [node name="Icon" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(557.5, 319.5)
+position = Vector2(588, 320)
 scale = Vector2(9.72656, 5.44531)
 texture = ExtResource("2_pescv")
 
@@ -46,14 +47,63 @@ offset_bottom = 40.0
 text = "Tank"
 
 [node name="Label" type="Label" parent="EnemySide"]
-offset_left = 454.0
+layout_mode = 0
+offset_left = 322.0
 offset_top = 2.0
-offset_right = 521.0
+offset_right = 389.0
 offset_bottom = 25.0
-text = "current: "
+text = "Enemy: "
 
-[node name="enemyHolder" type="Node2D" parent="."]
+[node name="TurretSide" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 566.0
+offset_top = 4.0
+offset_right = 606.0
+offset_bottom = 28.0
+
+[node name="heavy" type="Button" parent="TurretSide"]
+layout_mode = 0
+offset_left = 399.0
+offset_top = 2.0
+offset_right = 455.0
+offset_bottom = 33.0
+text = "Heavy"
+
+[node name="slow" type="Button" parent="TurretSide"]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 2.0
+offset_right = 505.0
+offset_bottom = 33.0
+text = "Slow"
+
+[node name="small" type="Button" parent="TurretSide"]
+layout_mode = 0
+offset_left = 509.0
+offset_top = 2.0
+offset_right = 560.0
+offset_bottom = 33.0
+text = "Small"
+
+[node name="Label" type="Label" parent="TurretSide"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 66.0
+offset_bottom = 21.0
+text = "Turret: "
+
+[node name="enemyHolder" type="Node" parent="."]
+
+[node name="test turret" parent="." instance=ExtResource("3_eiw1n")]
+position = Vector2(941, 298)
+
+[node name="turretHolder" type="Node" parent="."]
 
 [connection signal="pressed" from="EnemySide/walker" to="." method="_on_walker_pressed"]
 [connection signal="pressed" from="EnemySide/runner" to="." method="_on_runner_pressed"]
 [connection signal="pressed" from="EnemySide/tank" to="." method="_on_tank_pressed"]
+[connection signal="pressed" from="TurretSide/heavy" to="." method="_on_heavy_pressed"]
+[connection signal="pressed" from="TurretSide/slow" to="." method="_on_slow_pressed"]
+[connection signal="pressed" from="TurretSide/small" to="." method="_on_small_pressed"]
