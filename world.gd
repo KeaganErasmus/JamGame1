@@ -25,12 +25,6 @@ var current_turret_spawning = turret_type.none
 @onready var en_label = $EnemySide/Label
 @onready var tur_label = $TurretSide/Label
 
-var turret = preload("res://scenes/turret.tscn")
-var current_turret_spawning = turret_type.none
-
-@onready var en_label = $EnemySide/Label
-@onready var tur_label = $TurretSide/Label
-
 #func _ready():
 	#pass
 
@@ -66,7 +60,6 @@ func _on_walker_pressed():
 
 func _on_tank_pressed():
 	current_spawning = EnemyType.tank
-
 
 func _on_heavy_pressed():
 	current_turret_spawning = turret_type.heavy
