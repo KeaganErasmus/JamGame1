@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8sstqiscq7b2"]
+[gd_scene load_steps=4 format=3 uid="uid://b8sstqiscq7b2"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_vl3sp"]
 [ext_resource type="Texture2D" uid="uid://duwdgy0rn3ttk" path="res://icon.svg" id="2_pescv"]
+[ext_resource type="PackedScene" uid="uid://4hunt3gmuukc" path="res://scenes/turret.tscn" id="3_eiw1n"]
 
 [node name="world" type="Node2D"]
 script = ExtResource("1_vl3sp")
