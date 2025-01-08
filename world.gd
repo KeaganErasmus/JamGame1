@@ -33,6 +33,7 @@ var can_spawn_turret = false
 @onready var tur_label = $TurretSide/Label
 @onready var score_label = $ScoreLabel
 @onready var resource_label = $ResourceLabel
+@onready var castle = $Castle
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
