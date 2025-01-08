@@ -1,14 +1,18 @@
 extends Node2D
 
 @export var turret_type: String = "none"
-@export var enemies = null
 
 var fire_rate: float
 var damage: int
+var cost: int
 
 var en_dir = 0
 var en_distance = 0
 var timer = 0
+
+var enemies: Array = []
+
+@onready var name_label = $NameLabel
 
 func _ready():
 	match turret_type:
@@ -18,27 +22,45 @@ func _ready():
 			create_small()
 		"slow":
 			create_slow()
-			
+	name_label.text = str(turret_type)
+
 func _process(delta):
-	for enemy in get_tree().get_nodes_in_group("enemiesGroup"):
-		en_dir = position - enemy.position
-		#en_distance = distance(position, enemy.position)
+	for enemy in enemies:
+		if not is_instance_valid(enemy):
+			continue
 		en_distance = position.distance_to(enemy.position)
 		if en_distance <= 300:
-			look_at(enemy.position)
+			look_at(enemy.global_position)
 			shoot(delta)
+
+func find_nearest_enemy():
+	var closest_enemy = null
+	var shortest_distance = INF
+	
+	for en in enemies:
+		if not is_instance_valid(en):
+			continue
+		var distance = global_position.distance_to(en.global_position)
+		if distance < shortest_distance:
+			shortest_distance = distance
+			closest_enemy = en
+			
+	return closest_enemy
 
 func create_heavy():
 	fire_rate = 1
 	damage = 5
+	cost = 5
 	
 func create_small():
-	fire_rate = 0.2
+	fire_rate = 0.5
 	damage = 1
+	cost = 1
 	
 func create_slow():
 	fire_rate = 0.5
 	damage = 0
+	cost = 3
 
 func distance(v1: Vector2, v2: Vector2) -> float:
 	var result = sqrt((v1.x - v2.x)*(v1.x - v2.x) + (v1.y - v2.y)*(v1.y - v2.y))
@@ -47,7 +69,11 @@ func distance(v1: Vector2, v2: Vector2) -> float:
 func shoot(dt):
 	timer += dt
 	if timer > fire_rate:
+		var target = find_nearest_enemy()
 		print("shoot: ", turret_type, " ", timer)
-		for enemy in get_tree().get_nodes_in_group("enemiesGroup"):
-			enemy.health -= damage
+		if target:
+			target.health -= damage
 		timer =  0
+
+func set_enemies(en: Array):
+	enemies = en

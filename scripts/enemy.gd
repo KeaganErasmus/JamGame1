@@ -6,7 +6,6 @@ var speed: int
 @export var en_type: String = "none"
 
 func _ready():
-	add_to_group("enemiesGroup")
 	match en_type:
 		"walker":
 			create_walker()
@@ -15,13 +14,8 @@ func _ready():
 		"tank":
 			create_tank()
 
-
 func _process(delta):
 	position.x += speed * delta
-	
-	if health <= 0:
-		remove_from_group("enemiesGroup")
-		queue_free()
 
 func create_walker():
 	health = 20

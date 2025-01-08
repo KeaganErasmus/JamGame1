@@ -4,8 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://duwdgy0rn3ttk" path="res://icon.svg" id="2_roab6"]
 
 [node name="Turret" type="Node2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_7h5d8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.0235294, 1, 0, 1)
 texture = ExtResource("2_roab6")
+
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -23.0
+offset_top = -86.0
+offset_right = 24.0
+offset_bottom = -63.0
+text = "Name"

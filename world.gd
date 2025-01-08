@@ -15,18 +15,24 @@ var turret_type := {
 }
 
 var mouse_pos: Vector2
+var score: int = 0
+var timer = 0
+var resource: int = 50
 
 var enemy = preload("res://scenes/enemy.tscn")
 var current_spawning = EnemyType.none
+
+var enemies = []
 
 var turret = preload("res://scenes/turret.tscn")
 var current_turret_spawning = turret_type.none
 
 @onready var en_label = $EnemySide/Label
 @onready var tur_label = $TurretSide/Label
+@onready var score_label = $ScoreLabel
 
-#func _ready():
-	#pass
+func _ready():
+	score_label.text = "Score: "
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -35,20 +41,36 @@ func _unhandled_input(event):
 		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT and current_turret_spawning != "none":
 			spawn_turret()
 
-func _process(_delta):
-	mouse_pos = get_local_mouse_position()
+func _process(delta):
+	mouse_pos = get_global_mouse_position()
 	en_label.text = ("Enemy: " + str(current_spawning))
 	tur_label.text = ("Turret: " + str(current_turret_spawning))
+	
+	for en in enemies:
+		if en.health <= 0:
+			remove_enemy(en)
+	
+	timer += delta
+	if timer > 2 and resource < 50:
+		resource += 1
+		timer = 0
 
 func spawn_enemy():
 	var en = preload("res://scenes/enemy.tscn").instantiate()
 	en.en_type = current_spawning
 	get_node("enemyHolder").add_child(en)
 	en.global_position = mouse_pos
+	enemies.append(en)
+
+func remove_enemy(en):
+	if en in enemies:
+		enemies.erase(en)
+		en.queue_free()
 
 func spawn_turret():
 	var tur = preload("res://scenes/turret.tscn").instantiate()
 	tur.turret_type = current_turret_spawning
+	tur.set_enemies(enemies)
 	get_node("turretHolder").add_child(tur)
 	tur.global_position = mouse_pos
 
@@ -64,10 +86,8 @@ func _on_tank_pressed():
 func _on_heavy_pressed():
 	current_turret_spawning = turret_type.heavy
 
-
 func _on_slow_pressed():
 	current_turret_spawning = turret_type.slow
-
 
 func _on_small_pressed():
 	current_turret_spawning = turret_type.small
