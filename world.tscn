@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8sstqiscq7b2"]
+[gd_scene load_steps=6 format=3 uid="uid://b8sstqiscq7b2"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_vl3sp"]
 [ext_resource type="Texture2D" uid="uid://duwdgy0rn3ttk" path="res://icon.svg" id="2_pescv"]
 [ext_resource type="PackedScene" uid="uid://drlktwte18i70" path="res://scenes/castle.tscn" id="3_hc4b7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5fy1"]
+size = Vector2(313, 593)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwnw2"]
+size = Vector2(134, 560)
 
 [node name="world" type="Node2D"]
 script = ExtResource("1_vl3sp")
@@ -18,11 +24,18 @@ texture = ExtResource("2_pescv")
 [node name="turretHolder" type="Node" parent="."]
 
 [node name="ScoreLabel" type="Label" parent="."]
-offset_left = 536.0
-offset_top = 12.0
-offset_right = 588.0
-offset_bottom = 35.0
+offset_left = 534.0
+offset_top = 6.0
+offset_right = 586.0
+offset_bottom = 29.0
 text = "Score: "
+
+[node name="ResourceLabel" type="Label" parent="."]
+offset_left = 710.0
+offset_top = 6.0
+offset_right = 786.0
+offset_bottom = 30.0
+text = "Resource:"
 
 [node name="Castle" parent="." instance=ExtResource("3_hc4b7")]
 position = Vector2(1076, 323)
@@ -62,6 +75,7 @@ offset_bottom = 40.0
 text = "Tank"
 
 [node name="Label" type="Label" parent="EnemySide"]
+visible = false
 layout_mode = 0
 offset_left = 256.0
 offset_top = 12.0
@@ -102,12 +116,41 @@ offset_bottom = 33.0
 text = "Small"
 
 [node name="Label" type="Label" parent="TurretSide"]
+visible = false
 layout_mode = 0
-offset_left = 251.0
-offset_top = 5.0
-offset_right = 321.0
-offset_bottom = 28.0
+offset_left = 144.0
+offset_top = 2.0
+offset_right = 214.0
+offset_bottom = 25.0
 text = "Turret: "
+
+[node name="EnemySpawnSide" type="Area2D" parent="."]
+position = Vector2(65, 99)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnSide"]
+position = Vector2(99.5, 233.5)
+shape = SubResource("RectangleShape2D_k5fy1")
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemySpawnSide"]
+modulate = Color(0.14902, 0.333333, 0.486275, 1)
+position = Vector2(99.5, 232.5)
+scale = Vector2(2.38281, 4.63281)
+texture = ExtResource("2_pescv")
+
+[node name="TurretSpawnSide" type="Area2D" parent="."]
+position = Vector2(881, 54)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TurretSpawnSide"]
+position = Vector2(57, 286)
+shape = SubResource("RectangleShape2D_qwnw2")
+
+[node name="Sprite2D" type="Sprite2D" parent="TurretSpawnSide"]
+modulate = Color(0.129412, 0.631373, 0.47451, 1)
+position = Vector2(59, 288)
+scale = Vector2(1, 4.32813)
+texture = ExtResource("2_pescv")
 
 [connection signal="pressed" from="EnemySide/walker" to="." method="_on_walker_pressed"]
 [connection signal="pressed" from="EnemySide/runner" to="." method="_on_runner_pressed"]
@@ -115,3 +158,7 @@ text = "Turret: "
 [connection signal="pressed" from="TurretSide/heavy" to="." method="_on_heavy_pressed"]
 [connection signal="pressed" from="TurretSide/slow" to="." method="_on_slow_pressed"]
 [connection signal="pressed" from="TurretSide/small" to="." method="_on_small_pressed"]
+[connection signal="mouse_entered" from="EnemySpawnSide" to="." method="_on_enemy_spawn_side_entered"]
+[connection signal="mouse_exited" from="EnemySpawnSide" to="." method="_on_enemy_spawn_side_exited"]
+[connection signal="mouse_entered" from="TurretSpawnSide" to="." method="_on_turret_spawn_side_mouse_entered"]
+[connection signal="mouse_exited" from="TurretSpawnSide" to="." method="_on_turret_spawn_side_mouse_exited"]

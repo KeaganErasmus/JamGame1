@@ -23,32 +23,36 @@ var enemy = preload("res://scenes/enemy.tscn")
 var current_spawning = EnemyType.none
 
 var enemies = []
+var can_spawn_enemy = false
 
 var turret = preload("res://scenes/turret.tscn")
 var current_turret_spawning = turret_type.none
+var can_spawn_turret = false
 
 @onready var en_label = $EnemySide/Label
 @onready var tur_label = $TurretSide/Label
 @onready var score_label = $ScoreLabel
-
-func _ready():
-	score_label.text = "Score: "
+@onready var resource_label = $ResourceLabel
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT and current_spawning != "none":
+		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT and current_spawning != "none" and can_spawn_enemy:
 			spawn_enemy()
-		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT and current_turret_spawning != "none":
-			spawn_turret()
+		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT and current_turret_spawning != "none" and can_spawn_turret:
+			if resource > 0:
+				spawn_turret()
 
 func _process(delta):
 	mouse_pos = get_global_mouse_position()
 	en_label.text = ("Enemy: " + str(current_spawning))
 	tur_label.text = ("Turret: " + str(current_turret_spawning))
+	score_label.text = ("Score: " + str(score))
+	resource_label.text = ("Resource: " + str(resource))
 	
 	for en in enemies:
 		if en.health <= 0:
 			remove_enemy(en)
+			score += 1
 	
 	timer += delta
 	if timer > 2 and resource < 50:
@@ -73,6 +77,10 @@ func spawn_turret():
 	tur.set_enemies(enemies)
 	get_node("turretHolder").add_child(tur)
 	tur.global_position = mouse_pos
+	consume_resource(tur.cost)
+
+func consume_resource(amount: int):
+	resource -= amount
 
 func _on_runner_pressed():
 	current_spawning = EnemyType.runner
@@ -91,3 +99,15 @@ func _on_slow_pressed():
 
 func _on_small_pressed():
 	current_turret_spawning = turret_type.small
+
+func _on_enemy_spawn_side_entered():
+	can_spawn_enemy = true
+
+func _on_enemy_spawn_side_exited():
+	can_spawn_enemy = false
+
+func _on_turret_spawn_side_mouse_entered():
+	can_spawn_turret = true
+
+func _on_turret_spawn_side_mouse_exited():
+	can_spawn_turret = false
