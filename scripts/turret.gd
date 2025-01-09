@@ -16,6 +16,8 @@ var enemies: Array = []
 
 @onready var name_label = $NameLabel
 
+signal enemy_killed(enemy)
+
 func _ready():
 	match turret_type:
 		"heavy":
@@ -28,7 +30,6 @@ func _ready():
 
 func _process(delta):
 	ttl(delta)
-	
 	for enemy in enemies:
 		if not is_instance_valid(enemy):
 			continue
@@ -81,7 +82,9 @@ func shoot(dt):
 		var target = find_nearest_enemy()
 		print("shoot: ", turret_type, " ", timer)
 		if target:
-			target.health -= damage
+			target.take_damage(damage)
+			if target.health <= 0:
+				emit_signal("enemy_killed", target)
 		timer =  0
 
 func set_enemies(en: Array):

@@ -24,6 +24,7 @@ var current_spawning = EnemyType.none
 
 var enemies = []
 var can_spawn_enemy = false
+var killed_by_turret = true
 
 var turret = preload("res://scenes/turret.tscn")
 var current_turret_spawning = turret_type.none
@@ -53,7 +54,6 @@ func _process(delta):
 	for en in enemies:
 		if en.health <= 0:
 			remove_enemy(en)
-			score += 1
 	
 	timer += delta
 	if timer > 2 and resource < 50:
@@ -81,6 +81,12 @@ func spawn_turret():
 	get_node("turretHolder").add_child(tur)
 	tur.global_position = mouse_pos
 	consume_resource(tur.cost)
+	tur.connect("enemy_killed", Callable(self, "_on_enemy_killed"))
+
+func _on_enemy_killed(en):
+	if enemies.has(en):
+		enemies.erase(en)
+	score += 1
 
 func consume_resource(amount: int):
 	resource -= amount

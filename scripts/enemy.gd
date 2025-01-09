@@ -4,6 +4,7 @@ var health: int
 var speed: int
 var damage: int
 var hit_rate: int
+var is_alive: bool = true
 
 var attack_time: float = 0
 var castle: Area2D
@@ -51,7 +52,16 @@ func set_castle(thing):
 	castle = thing
 
 func die():
+	is_alive = false
 	queue_free()
 
 func get_damage() -> int:
 	return damage
+
+func take_damage(amount: int):
+	health -= amount
+	if health <= 0:
+		die()
+
+func get_alive_status() -> bool:
+	return is_alive
