@@ -1,10 +1,13 @@
-extends StaticBody2D
+extends Area2D
 
 @export var health = 100
 
+@onready var health_label = $Health
+
 func take_damage(amount: int):
 	health -= amount
-	print("ooft")
+	health_label.text = str(health)
+
 	
 
 func _process(_delta):

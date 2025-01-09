@@ -63,14 +63,16 @@ func _process(delta):
 func spawn_enemy():
 	var en = preload("res://scenes/enemy.tscn").instantiate()
 	en.en_type = current_spawning
+	en.add_to_group("enemiesGroup")
 	get_node("enemyHolder").add_child(en)
 	en.global_position = mouse_pos
+	en.set_castle(castle)
 	enemies.append(en)
 
 func remove_enemy(en):
 	if en in enemies:
 		enemies.erase(en)
-		en.queue_free()
+		en.die()
 
 func spawn_turret():
 	var tur = preload("res://scenes/turret.tscn").instantiate()
@@ -112,3 +114,9 @@ func _on_turret_spawn_side_mouse_entered():
 
 func _on_turret_spawn_side_mouse_exited():
 	can_spawn_turret = false
+
+func _on_castle_area_entered(area):
+	if area.is_in_group("enemiesGroup"):
+		var amount = area.get_damage()
+		castle.take_damage(amount)
+		area.health = 0

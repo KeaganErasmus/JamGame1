@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 var health: int
 var speed: int
@@ -6,6 +6,7 @@ var damage: int
 var hit_rate: int
 
 var attack_time: float = 0
+var castle: Area2D
 
 @export var en_type: String = "none"
 
@@ -30,13 +31,13 @@ func create_walker():
 func create_runner():
 	health = 5
 	speed = 50
-	damage = 5
+	damage = 4
 	$Sprite2D.modulate = "#F46036"
 
 func create_tank():
 	health = 20
 	speed = 10
-	damage = 5
+	damage = 3
 	$Sprite2D.modulate = "#FFD23F"
 
 func do_damage(dt: float):
@@ -45,3 +46,12 @@ func do_damage(dt: float):
 		print("hit")
 		attack_time = 0
 	pass
+
+func set_castle(thing):
+	castle = thing
+
+func die():
+	queue_free()
+
+func get_damage() -> int:
+	return damage

@@ -152,7 +152,6 @@ position = Vector2(59, 288)
 scale = Vector2(1, 4.32813)
 texture = ExtResource("2_pescv")
 
-[connection signal="area_entered" from="Castle" to="." method="_on_castle_area_entered"]
 [connection signal="pressed" from="EnemySide/walker" to="." method="_on_walker_pressed"]
 [connection signal="pressed" from="EnemySide/runner" to="." method="_on_runner_pressed"]
 [connection signal="pressed" from="EnemySide/tank" to="." method="_on_tank_pressed"]
