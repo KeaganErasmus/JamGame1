@@ -123,6 +123,5 @@ func _on_turret_spawn_side_mouse_exited():
 
 func _on_castle_area_entered(area):
 	if area.is_in_group("enemiesGroup"):
-		var amount = area.get_damage()
-		castle.take_damage(amount)
+		castle.take_damage(area.damage)
 		area.health = 0
