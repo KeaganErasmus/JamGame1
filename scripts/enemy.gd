@@ -51,7 +51,8 @@ func create_runner():
 	is_stuned = false
 	health_bar.max_value = health
 	health_bar.value = health
-	$Sprite2D.modulate = "#F46036"
+	sprite.sprite_frames = preload("res://scenes/runner_anim.tres")
+	sprite.play("idle")
 
 func create_tank():
 	health = 20
@@ -60,7 +61,8 @@ func create_tank():
 	is_stuned = false
 	health_bar.max_value = health
 	health_bar.value = health
-	$Sprite2D.modulate = "#FFD23F"
+	sprite.sprite_frames = preload("res://scenes/tank_anim.tres")
+	sprite.play("idle")
 
 func do_damage(dt: float):
 	attack_time += dt

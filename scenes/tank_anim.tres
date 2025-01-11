@@ -1,0 +1,65 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://dw67e60plmbdg"]
+
+[ext_resource type="Texture2D" uid="uid://y0nlxpgcjtiu" path="res://assets/tank_enemy.png" id="1_yx38u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwef3"]
+atlas = ExtResource("1_yx38u")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5nla"]
+atlas = ExtResource("1_yx38u")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rxvq"]
+atlas = ExtResource("1_yx38u")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6q7w"]
+atlas = ExtResource("1_yx38u")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r476n"]
+atlas = ExtResource("1_yx38u")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r038h"]
+atlas = ExtResource("1_yx38u")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol6t3"]
+atlas = ExtResource("1_yx38u")
+region = Rect2(320, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwef3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5nla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rxvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6q7w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r476n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r038h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol6t3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]

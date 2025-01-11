@@ -91,7 +91,6 @@ func _on_enemy_killed(en):
 
 func _on_enemy_stuned(en):
 	en.is_stuned = true
-	print("BEANS")
 
 func consume_resource(amount: int):
 	resource -= amount
