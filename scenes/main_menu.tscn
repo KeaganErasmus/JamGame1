@@ -1,6 +1,16 @@
-[gd_scene format=3 uid="uid://tuxoh02ec5q4"]
+[gd_scene load_steps=3 format=3 uid="uid://tuxoh02ec5q4"]
+
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_yw70x"]
+[ext_resource type="Texture2D" uid="uid://bgum46nq5xcxc" path="res://assets/Background.png" id="2_3ki3q"]
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource("1_yw70x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(610, 389)
+scale = Vector2(3, 3)
+texture = ExtResource("2_3ki3q")
 
 [node name="PlayButton" type="Button" parent="."]
 offset_left = 443.0
@@ -24,3 +34,7 @@ offset_top = 366.0
 offset_right = 763.0
 offset_bottom = 397.0
 text = "Quit"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="HowToPlay" to="." method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
