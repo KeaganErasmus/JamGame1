@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8sstqiscq7b2"]
+[gd_scene load_steps=8 format=3 uid="uid://b8sstqiscq7b2"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_vl3sp"]
-[ext_resource type="Texture2D" uid="uid://duwdgy0rn3ttk" path="res://icon.svg" id="2_pescv"]
+[ext_resource type="Texture2D" uid="uid://bgum46nq5xcxc" path="res://assets/Background.png" id="2_pt0pg"]
 [ext_resource type="PackedScene" uid="uid://drlktwte18i70" path="res://scenes/castle.tscn" id="3_hc4b7"]
+[ext_resource type="Texture2D" uid="uid://dpb62ctoglufa" path="res://assets/enemy_spawn_box.png" id="4_2v5i6"]
+[ext_resource type="Texture2D" uid="uid://db7x5p2fe3rry" path="res://assets/turret_spawn_box.png" id="5_8rerk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5fy1"]
 size = Vector2(313, 593)
@@ -14,10 +16,10 @@ size = Vector2(134, 560)
 script = ExtResource("1_vl3sp")
 
 [node name="Background" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(588, 320)
-scale = Vector2(9.72656, 5.44531)
-texture = ExtResource("2_pescv")
+texture_filter = 1
+position = Vector2(637, 477)
+scale = Vector2(3, 3)
+texture = ExtResource("2_pt0pg")
 
 [node name="enemyHolder" type="Node" parent="."]
 
@@ -54,6 +56,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 10.0
+offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Walker"
@@ -63,15 +67,15 @@ layout_mode = 0
 offset_left = 160.0
 offset_top = 2.0
 offset_right = 231.0
-offset_bottom = 42.0
+offset_bottom = 33.0
 text = "Runner"
 
 [node name="tank" type="Button" parent="EnemySide"]
 layout_mode = 1
 offset_left = 81.0
 offset_top = 2.0
-offset_right = 151.0
-offset_bottom = 40.0
+offset_right = 158.0
+offset_bottom = 33.0
 text = "Tank"
 
 [node name="Label" type="Label" parent="EnemySide"]
@@ -133,10 +137,10 @@ position = Vector2(99.5, 233.5)
 shape = SubResource("RectangleShape2D_k5fy1")
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemySpawnSide"]
-modulate = Color(0.14902, 0.333333, 0.486275, 1)
-position = Vector2(99.5, 232.5)
-scale = Vector2(2.38281, 4.63281)
-texture = ExtResource("2_pescv")
+texture_filter = 1
+position = Vector2(97.5, 238)
+scale = Vector2(4.98438, 9.5)
+texture = ExtResource("4_2v5i6")
 
 [node name="TurretSpawnSide" type="Area2D" parent="."]
 position = Vector2(881, 54)
@@ -147,10 +151,11 @@ position = Vector2(57, 286)
 shape = SubResource("RectangleShape2D_qwnw2")
 
 [node name="Sprite2D" type="Sprite2D" parent="TurretSpawnSide"]
-modulate = Color(0.129412, 0.631373, 0.47451, 1)
-position = Vector2(59, 288)
-scale = Vector2(1, 4.32813)
-texture = ExtResource("2_pescv")
+modulate = Color(1, 1, 1, 0.133333)
+texture_filter = 1
+position = Vector2(57.5, 287.5)
+scale = Vector2(2.04687, 9.45313)
+texture = ExtResource("5_8rerk")
 
 [connection signal="area_entered" from="Castle" to="." method="_on_castle_area_entered"]
 [connection signal="pressed" from="EnemySide/walker" to="." method="_on_walker_pressed"]

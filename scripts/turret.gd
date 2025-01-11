@@ -16,6 +16,7 @@ var enemies: Array = []
 
 @onready var name_label = $NameLabel
 @onready var sprite = $AnimatedSprite2D
+@onready var progress_bar = $ProgressBar
 
 signal enemy_killed(enemy)
 signal enemy_stuned(enemy)
@@ -31,6 +32,7 @@ func _ready():
 	name_label.text = str(turret_type)
 
 func _process(delta):
+	progress_bar.value -= delta
 	ttl(delta)
 	for enemy in enemies:
 		if not is_instance_valid(enemy):
@@ -40,9 +42,9 @@ func _process(delta):
 			look_at(enemy.global_position )
 			shoot(delta)
 
-func _draw():
-	# Draw a line from the center to a point 100 units in the forward direction
-	draw_line(Vector2.ZERO, Vector2(100, 0), Color.RED, 2)
+#func _draw():
+	## Draw a line from the center to a point 100 units in the forward direction
+	#draw_line(Vector2.ZERO, Vector2(100, 0), Color.RED, 2)
 
 func ttl(dt):
 	time_to_death += dt
@@ -69,6 +71,8 @@ func create_heavy():
 	damage = 5
 	cost = 5
 	time_to_live = 2
+	progress_bar.max_value = time_to_live
+	progress_bar.value = time_to_live
 	sprite.sprite_frames = preload("res://scenes/heavy_turret_anim.tres")
 	sprite.play("idle")
 	
@@ -78,6 +82,8 @@ func create_small():
 	damage = 1
 	cost = 1
 	time_to_live = 5
+	progress_bar.max_value = time_to_live
+	progress_bar.value = time_to_live
 	sprite.sprite_frames = preload("res://scenes/small_turret_anim.tres")
 	sprite.play("idle")
 	
@@ -86,6 +92,8 @@ func create_slow():
 	damage = 0
 	cost = 3
 	time_to_live = 5
+	progress_bar.max_value = time_to_live
+	progress_bar.value = time_to_live
 	sprite.sprite_frames = preload("res://scenes/slow_turret_anim.tres")
 	sprite.play("idle")
 

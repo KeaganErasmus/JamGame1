@@ -13,6 +13,7 @@ var castle: Area2D
 
 @export var en_type: String = "none"
 @onready var sprite = $AnimatedSprite2D
+@onready var health_bar = $HealthBar
 
 func _ready():
 	match en_type:
@@ -38,14 +39,18 @@ func create_walker():
 	speed = 20
 	damage = 5
 	is_stuned = false
+	health_bar.max_value = health
+	health_bar.value = health
 	sprite.sprite_frames = preload("res://scenes/walker_anim.tres")
 	sprite.play("idle")
-	
+
 func create_runner():
 	health = 5
 	speed = 50
 	damage = 4
 	is_stuned = false
+	health_bar.max_value = health
+	#health_bar.value = health
 	$Sprite2D.modulate = "#F46036"
 
 func create_tank():
@@ -53,6 +58,8 @@ func create_tank():
 	speed = 10
 	damage = 3
 	is_stuned = false
+	health_bar.max_value = health
+	health_bar.value = health
 	$Sprite2D.modulate = "#FFD23F"
 
 func do_damage(dt: float):
@@ -72,3 +79,4 @@ func take_damage(amount: int):
 	health -= amount
 	if health <= 0:
 		die()
+	health_bar.value = health

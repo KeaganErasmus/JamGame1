@@ -21,3 +21,11 @@ shape = SubResource("RectangleShape2D_5dird")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_lmr4c")
 animation = &"walk"
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -15.0
+offset_top = -32.0
+offset_right = 16.0
+offset_bottom = -28.0
+step = 1.0
+show_percentage = false
