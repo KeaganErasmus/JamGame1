@@ -1,8 +1,8 @@
 extends Area2D
 
-@export var health = 100
+@export var health: int = 100
 
-@onready var health_label = $Health
+@onready var health_label: Label = $Health
 
 func take_damage(amount: int):
 	health -= amount

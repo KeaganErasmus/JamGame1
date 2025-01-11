@@ -7,16 +7,16 @@ var damage: int
 var cost: int
 var time_to_live: int
 
-var en_dir = 0
-var en_distance = 0
-var timer = 0
-var time_to_death = 0
+var en_dir: int = 0
+var en_distance: int = 0
+var timer: float = 0
+var time_to_death: float = 0
 
 var enemies: Array = []
 
-@onready var name_label = $NameLabel
-@onready var sprite = $AnimatedSprite2D
-@onready var progress_bar = $ProgressBar
+@onready var name_label: Label = $NameLabel
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var progress_bar: ProgressBar = $ProgressBar
 
 signal enemy_killed(enemy)
 signal enemy_stuned(enemy)
@@ -42,17 +42,13 @@ func _process(delta):
 			look_at(enemy.global_position )
 			shoot(delta)
 
-#func _draw():
-	## Draw a line from the center to a point 100 units in the forward direction
-	#draw_line(Vector2.ZERO, Vector2(100, 0), Color.RED, 2)
-
 func ttl(dt):
 	time_to_death += dt
 	if time_to_death > time_to_live:
 		queue_free()
 		time_to_death = 0
 
-func find_nearest_enemy():
+func find_nearest_enemy() -> Node:
 	var closest_enemy = null
 	var shortest_distance = INF
 	

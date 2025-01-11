@@ -16,25 +16,25 @@ var turret_type := {
 
 var mouse_pos: Vector2
 var score: int = 0
-var timer = 0
+var timer: float = 0
 var resource: int = 50
 
-var enemy = preload("res://scenes/enemy.tscn")
-var current_spawning = EnemyType.none
+var enemy: PackedScene = preload("res://scenes/enemy.tscn")
+var current_spawning: String = EnemyType.none
 
-var enemies = []
-var can_spawn_enemy = false
-var killed_by_turret = true
+var enemies: Array = []
+var can_spawn_enemy: bool = false
+var killed_by_turret: bool = true
 
-var turret = preload("res://scenes/turret.tscn")
-var current_turret_spawning = turret_type.none
-var can_spawn_turret = false
+var turret: PackedScene = preload("res://scenes/turret.tscn")
+var current_turret_spawning: String = turret_type.none
+var can_spawn_turret: bool = false
 
-@onready var en_label = $EnemySide/Label
-@onready var tur_label = $TurretSide/Label
-@onready var score_label = $ScoreLabel
-@onready var resource_label = $ResourceLabel
-@onready var castle = $Castle
+@onready var en_label: Label = $EnemySide/Label
+@onready var tur_label: Label = $TurretSide/Label
+@onready var score_label: Label = $ScoreLabel
+@onready var resource_label: Label = $ResourceLabel
+@onready var castle: Node = $Castle
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:

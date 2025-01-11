@@ -12,8 +12,8 @@ var attack_time: float = 0
 var castle: Area2D
 
 @export var en_type: String = "none"
-@onready var sprite = $AnimatedSprite2D
-@onready var health_bar = $HealthBar
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var health_bar: ProgressBar = $HealthBar
 
 func _ready():
 	match en_type:
@@ -67,9 +67,7 @@ func create_tank():
 func do_damage(dt: float):
 	attack_time += dt
 	if attack_time > hit_rate:
-		print("hit")
 		attack_time = 0
-	pass
 
 func set_castle(thing):
 	castle = thing
