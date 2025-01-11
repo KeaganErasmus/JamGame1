@@ -59,6 +59,9 @@ func _process(delta):
 	if timer > 2 and resource < 50:
 		resource += 1
 		timer = 0
+	
+	if castle.health <= 0:
+		game_lost()
 
 func spawn_enemy():
 	var en = preload("res://scenes/enemy.tscn").instantiate()
@@ -129,3 +132,9 @@ func _on_castle_area_entered(area):
 	if area.is_in_group("enemiesGroup"):
 		castle.take_damage(area.damage)
 		area.health = 0
+
+func game_lost():
+	var game_over_screen = preload("res://scenes/game_over_screen.tscn").instantiate()
+	game_over_screen.score = score
+	get_tree().root.add_child(game_over_screen)
+	queue_free()

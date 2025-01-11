@@ -1,20 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://drlktwte18i70"]
+[gd_scene load_steps=5 format=3 uid="uid://drlktwte18i70"]
 
-[ext_resource type="Texture2D" uid="uid://duwdgy0rn3ttk" path="res://icon.svg" id="1_7gw44"]
 [ext_resource type="Script" path="res://scripts/castle.gd" id="1_mmuqf"]
+[ext_resource type="Texture2D" uid="uid://bt06f4y850doh" path="res://assets/planet.png" id="2_33ypk"]
+[ext_resource type="AudioStream" uid="uid://clndgyeg1kwyn" path="res://assets/sounds/enemy_hit.wav" id="3_4lsvo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3c8rq"]
-size = Vector2(129, 128)
+size = Vector2(60, 652)
 
 [node name="Castle" type="Area2D"]
+texture_filter = 1
+scale = Vector2(2.92, 1)
 script = ExtResource("1_mmuqf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 1, 1)
-texture = ExtResource("1_7gw44")
+texture = ExtResource("2_33ypk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 1)
+position = Vector2(-2, -3)
 shape = SubResource("RectangleShape2D_3c8rq")
 
 [node name="Health" type="Label" parent="."]
@@ -23,3 +25,7 @@ offset_top = -8.0
 offset_right = 28.0
 offset_bottom = 15.0
 text = "100"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4lsvo")
+volume_db = -6.0

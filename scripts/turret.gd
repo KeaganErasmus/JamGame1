@@ -99,6 +99,8 @@ func shoot(dt):
 		var target = find_nearest_enemy()
 		if target:
 			sprite.play("shoot")
+			if !$AudioStreamPlayer.playing:
+				$AudioStreamPlayer.play()
 			target.take_damage(damage)
 			if turret_type == "slow":
 				emit_signal("enemy_stuned", target)

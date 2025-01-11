@@ -40,8 +40,7 @@ offset_bottom = 30.0
 text = "Resource:"
 
 [node name="Castle" parent="." instance=ExtResource("3_hc4b7")]
-position = Vector2(1076, 323)
-scale = Vector2(1, 4.79)
+position = Vector2(1107, 331)
 
 [node name="EnemySide" type="Control" parent="."]
 layout_mode = 3

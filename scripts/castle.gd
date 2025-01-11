@@ -7,7 +7,6 @@ extends Area2D
 func take_damage(amount: int):
 	health -= amount
 	health_label.text = str(health)
-
-func _process(_delta):
-	if health <= 0:
-		print("ve lost")
+	
+	if !$AudioStreamPlayer.playing:
+		$AudioStreamPlayer.play()
