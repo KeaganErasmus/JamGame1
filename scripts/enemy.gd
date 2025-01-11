@@ -4,8 +4,11 @@ var health: int
 var speed: int
 var damage: int
 var hit_rate: int
+var is_stuned: bool
 
+var stunned_timer: float = 0
 var attack_time: float = 0
+
 var castle: Area2D
 
 @export var en_type: String = "none"
@@ -21,13 +24,20 @@ func _ready():
 			create_tank()
 
 func _process(delta):
-	position.x += speed * delta
-	sprite.play("walk")
+	if !is_stuned:
+		position.x += speed * delta
+		sprite.play("walk")
+	if is_stuned:
+		stunned_timer += delta
+		if stunned_timer > 1:
+			is_stuned = false
+			stunned_timer = 0
 
 func create_walker():
 	health = 20
 	speed = 20
 	damage = 5
+	is_stuned = false
 	sprite.sprite_frames = preload("res://scenes/walker_anim.tres")
 	sprite.play("idle")
 	
@@ -35,12 +45,14 @@ func create_runner():
 	health = 5
 	speed = 50
 	damage = 4
+	is_stuned = false
 	$Sprite2D.modulate = "#F46036"
 
 func create_tank():
 	health = 20
 	speed = 10
 	damage = 3
+	is_stuned = false
 	$Sprite2D.modulate = "#FFD23F"
 
 func do_damage(dt: float):

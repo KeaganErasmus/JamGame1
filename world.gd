@@ -82,11 +82,16 @@ func spawn_turret():
 	tur.global_position = mouse_pos
 	consume_resource(tur.cost)
 	tur.connect("enemy_killed", Callable(self, "_on_enemy_killed"))
+	tur.connect("enemy_stuned", Callable(self, "_on_enemy_stuned"))
 
 func _on_enemy_killed(en):
 	if enemies.has(en):
 		enemies.erase(en)
 	score += 1
+
+func _on_enemy_stuned(en):
+	en.is_stuned = true
+	print("BEANS")
 
 func consume_resource(amount: int):
 	resource -= amount

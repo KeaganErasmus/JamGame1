@@ -18,6 +18,7 @@ var enemies: Array = []
 @onready var sprite = $AnimatedSprite2D
 
 signal enemy_killed(enemy)
+signal enemy_stuned(enemy)
 
 func _ready():
 	match turret_type:
@@ -42,7 +43,6 @@ func _process(delta):
 func _draw():
 	# Draw a line from the center to a point 100 units in the forward direction
 	draw_line(Vector2.ZERO, Vector2(100, 0), Color.RED, 2)
-
 
 func ttl(dt):
 	time_to_death += dt
@@ -82,10 +82,12 @@ func create_small():
 	sprite.play("idle")
 	
 func create_slow():
-	fire_rate = 0.5
+	fire_rate = 1
 	damage = 0
 	cost = 3
 	time_to_live = 5
+	sprite.sprite_frames = preload("res://scenes/slow_turret_anim.tres")
+	sprite.play("idle")
 
 func shoot(dt):
 	timer += dt
@@ -94,6 +96,8 @@ func shoot(dt):
 		if target:
 			sprite.play("shoot")
 			target.take_damage(damage)
+			if turret_type == "slow":
+				emit_signal("enemy_stuned", target)
 			if target.health <= 0:
 				emit_signal("enemy_killed", target)
 		timer =  0
