@@ -15,6 +15,7 @@ var time_to_death = 0
 var enemies: Array = []
 
 @onready var name_label = $NameLabel
+@onready var sprite = $AnimatedSprite2D
 
 signal enemy_killed(enemy)
 
@@ -35,8 +36,13 @@ func _process(delta):
 			continue
 		en_distance = position.distance_to(enemy.position)
 		if en_distance <= 300:
-			look_at(enemy.global_position)
+			look_at(enemy.global_position )
 			shoot(delta)
+
+func _draw():
+	# Draw a line from the center to a point 100 units in the forward direction
+	draw_line(Vector2.ZERO, Vector2(100, 0), Color.RED, 2)
+
 
 func ttl(dt):
 	time_to_death += dt
@@ -63,12 +69,17 @@ func create_heavy():
 	damage = 5
 	cost = 5
 	time_to_live = 2
+	sprite.sprite_frames = preload("res://scenes/heavy_turret_anim.tres")
+	sprite.play("idle")
+	
 	
 func create_small():
 	fire_rate = 0.5
 	damage = 1
 	cost = 1
 	time_to_live = 5
+	sprite.sprite_frames = preload("res://scenes/small_turret_anim.tres")
+	sprite.play("idle")
 	
 func create_slow():
 	fire_rate = 0.5
@@ -80,8 +91,8 @@ func shoot(dt):
 	timer += dt
 	if timer > fire_rate:
 		var target = find_nearest_enemy()
-		print("shoot: ", turret_type, " ", timer)
 		if target:
+			sprite.play("shoot")
 			target.take_damage(damage)
 			if target.health <= 0:
 				emit_signal("enemy_killed", target)

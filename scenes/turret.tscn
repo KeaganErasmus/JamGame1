@@ -1,19 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://4hunt3gmuukc"]
+[gd_scene load_steps=4 format=3 uid="uid://4hunt3gmuukc"]
 
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_7h5d8"]
 [ext_resource type="Texture2D" uid="uid://duwdgy0rn3ttk" path="res://icon.svg" id="2_roab6"]
+[ext_resource type="SpriteFrames" uid="uid://dily6ahx8rnf4" path="res://scenes/heavy_turret_anim.tres" id="3_yqw7n"]
 
 [node name="Turret" type="Node2D"]
-scale = Vector2(0.5, 0.5)
+rotation = -3.14159
 script = ExtResource("1_7h5d8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.0235294, 1, 0, 1)
 texture = ExtResource("2_roab6")
 
 [node name="NameLabel" type="Label" parent="."]
+visible = false
 offset_left = -23.0
 offset_top = -86.0
 offset_right = 24.0
 offset_bottom = -63.0
 text = "Name"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1.05593, -1.38111)
+rotation = 1.5708
+sprite_frames = ExtResource("3_yqw7n")
+animation = &"shoot"
+frame_progress = 0.780107

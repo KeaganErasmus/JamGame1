@@ -9,6 +9,7 @@ var attack_time: float = 0
 var castle: Area2D
 
 @export var en_type: String = "none"
+@onready var sprite = $AnimatedSprite2D
 
 func _ready():
 	match en_type:
@@ -21,12 +22,14 @@ func _ready():
 
 func _process(delta):
 	position.x += speed * delta
+	sprite.play("walk")
 
 func create_walker():
 	health = 20
 	speed = 20
 	damage = 5
-	$Sprite2D.modulate = "#D72638"
+	sprite.sprite_frames = preload("res://scenes/walker_anim.tres")
+	sprite.play("idle")
 	
 func create_runner():
 	health = 5

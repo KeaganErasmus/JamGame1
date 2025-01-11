@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1vjeivprlpob"]
+[gd_scene load_steps=5 format=3 uid="uid://c1vjeivprlpob"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_g3ea0"]
 [ext_resource type="Texture2D" uid="uid://duwdgy0rn3ttk" path="res://icon.svg" id="1_nwf02"]
+[ext_resource type="SpriteFrames" uid="uid://cprxbmgiee3qk" path="res://scenes/walker_anim.tres" id="3_lmr4c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5dird"]
 size = Vector2(62, 64)
@@ -11,8 +12,12 @@ collision_mask = 0
 script = ExtResource("1_g3ea0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+visible = false
 texture = ExtResource("1_nwf02")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5dird")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_lmr4c")
+animation = &"walk"
