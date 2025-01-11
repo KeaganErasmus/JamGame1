@@ -50,7 +50,7 @@ func create_runner():
 	damage = 4
 	is_stuned = false
 	health_bar.max_value = health
-	#health_bar.value = health
+	health_bar.value = health
 	$Sprite2D.modulate = "#F46036"
 
 func create_tank():

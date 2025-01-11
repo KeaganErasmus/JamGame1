@@ -70,7 +70,7 @@ func create_heavy():
 	fire_rate = 1
 	damage = 5
 	cost = 5
-	time_to_live = 2
+	time_to_live = 3
 	progress_bar.max_value = time_to_live
 	progress_bar.value = time_to_live
 	sprite.sprite_frames = preload("res://scenes/heavy_turret_anim.tres")
