@@ -34,12 +34,12 @@ func _ready():
 func _process(delta):
 	progress_bar.value -= delta
 	ttl(delta)
-	for enemy in enemies:
-		if not is_instance_valid(enemy):
-			continue
-		en_distance = position.distance_to(enemy.position)
+	var target = find_nearest_enemy()
+	
+	if target:
+		en_distance = position.distance_to(target.position)
 		if en_distance <= 300:
-			shoot(delta)
+			shoot(target, delta)
 
 func ttl(dt):
 	time_to_death += dt
@@ -63,7 +63,7 @@ func find_nearest_enemy() -> Node:
 
 func create_heavy():
 	fire_rate = 1
-	damage = 5
+	damage = 4
 	cost = 5
 	time_to_live = 3
 	progress_bar.max_value = time_to_live
@@ -74,7 +74,7 @@ func create_heavy():
 	
 func create_small():
 	fire_rate = 0.5
-	damage = 1
+	damage = 2
 	cost = 1
 	time_to_live = 5
 	progress_bar.max_value = time_to_live
@@ -92,10 +92,10 @@ func create_slow():
 	sprite.sprite_frames = preload("res://scenes/slow_turret_anim.tres")
 	sprite.play("idle")
 
-func shoot(dt):
+func shoot(target, dt):
 	timer += dt
 	if timer > fire_rate:
-		var target = find_nearest_enemy()
+		#var target = find_nearest_enemy()
 		if target:
 			look_at(target.position)
 			sprite.play("shoot")

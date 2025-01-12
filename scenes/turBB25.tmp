@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://4hunt3gmuukc"]
+
+[ext_resource type="Script" path="res://scripts/turret.gd" id="1_7h5d8"]
+[ext_resource type="Texture2D" uid="uid://duwdgy0rn3ttk" path="res://icon.svg" id="2_roab6"]
+[ext_resource type="SpriteFrames" uid="uid://dily6ahx8rnf4" path="res://scenes/heavy_turret_anim.tres" id="3_yqw7n"]
+[ext_resource type="AudioStream" uid="uid://ciuwd85j8c7jb" path="res://assets/sounds/gun_shoot.wav" id="4_i1xcy"]
+
+[node name="Turret" type="Node2D"]
+rotation = -3.14159
+script = ExtResource("1_7h5d8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.0235294, 1, 0, 1)
+texture = ExtResource("2_roab6")
+
+[node name="NameLabel" type="Label" parent="."]
+visible = false
+offset_left = -23.0
+offset_top = -86.0
+offset_right = 24.0
+offset_bottom = -63.0
+text = "Name"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1.05593, -1.38111)
+rotation = 1.5708
+sprite_frames = ExtResource("3_yqw7n")
+animation = &"shoot"
+frame_progress = 0.780107
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -46.0
+offset_top = -22.0
+offset_right = -33.0
+offset_bottom = 20.0
+step = 0.001
+fill_mode = 2
+show_percentage = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_i1xcy")
+volume_db = -7.0

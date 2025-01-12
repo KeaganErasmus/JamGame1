@@ -36,9 +36,9 @@ func _process(delta):
 			stunned_timer = 0
 
 func create_walker():
-	health = 20
+	health = 10
 	speed = 50
-	damage = 5
+	damage = 4
 	score_amount = 2
 	is_stuned = false
 	health_bar.max_value = health
@@ -47,7 +47,7 @@ func create_walker():
 	sprite.play("idle")
 
 func create_runner():
-	health = 5
+	health = 6
 	speed = 60
 	damage = 4
 	score_amount = 1
@@ -58,11 +58,11 @@ func create_runner():
 	sprite.play("idle")
 
 func create_tank():
-	health = 20
-	speed = 40
+	health = 18
+	speed = 35
 	damage = 3
-	is_stuned = false
 	score_amount = 5
+	is_stuned = false
 	health_bar.max_value = health
 	health_bar.value = health
 	sprite.sprite_frames = preload("res://scenes/tank_anim.tres")
