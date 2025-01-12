@@ -39,7 +39,6 @@ func _process(delta):
 			continue
 		en_distance = position.distance_to(enemy.position)
 		if en_distance <= 300:
-			look_at(enemy.global_position )
 			shoot(delta)
 
 func ttl(dt):
@@ -98,6 +97,7 @@ func shoot(dt):
 	if timer > fire_rate:
 		var target = find_nearest_enemy()
 		if target:
+			look_at(target.position)
 			sprite.play("shoot")
 			if !$AudioStreamPlayer.playing:
 				$AudioStreamPlayer.play()

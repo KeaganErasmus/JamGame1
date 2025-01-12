@@ -36,7 +36,7 @@ func _process(delta):
 
 func create_walker():
 	health = 20
-	speed = 20
+	speed = 50
 	damage = 5
 	is_stuned = false
 	health_bar.max_value = health
@@ -46,7 +46,7 @@ func create_walker():
 
 func create_runner():
 	health = 5
-	speed = 50
+	speed = 60
 	damage = 4
 	is_stuned = false
 	health_bar.max_value = health
@@ -56,7 +56,7 @@ func create_runner():
 
 func create_tank():
 	health = 20
-	speed = 10
+	speed = 40
 	damage = 3
 	is_stuned = false
 	health_bar.max_value = health
