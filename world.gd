@@ -101,7 +101,7 @@ func spawn_turret():
 func _on_enemy_killed(en):
 	if enemies.has(en):
 		enemies.erase(en)
-	score += 1
+	score += en.score_amount
 
 func _on_enemy_stuned(en):
 	en.is_stuned = true

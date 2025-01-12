@@ -5,6 +5,7 @@ var speed: int
 var damage: int
 var hit_rate: int
 var is_stuned: bool
+var score_amount: int
 
 var stunned_timer: float = 0
 var attack_time: float = 0
@@ -38,6 +39,7 @@ func create_walker():
 	health = 20
 	speed = 50
 	damage = 5
+	score_amount = 2
 	is_stuned = false
 	health_bar.max_value = health
 	health_bar.value = health
@@ -48,6 +50,7 @@ func create_runner():
 	health = 5
 	speed = 60
 	damage = 4
+	score_amount = 1
 	is_stuned = false
 	health_bar.max_value = health
 	health_bar.value = health
@@ -59,6 +62,7 @@ func create_tank():
 	speed = 40
 	damage = 3
 	is_stuned = false
+	score_amount = 5
 	health_bar.max_value = health
 	health_bar.value = health
 	sprite.sprite_frames = preload("res://scenes/tank_anim.tres")
