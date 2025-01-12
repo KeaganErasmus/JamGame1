@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8sstqiscq7b2"]
+[gd_scene load_steps=9 format=3 uid="uid://b8sstqiscq7b2"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_vl3sp"]
 [ext_resource type="Texture2D" uid="uid://bgum46nq5xcxc" path="res://assets/Background.png" id="2_pt0pg"]
 [ext_resource type="PackedScene" uid="uid://drlktwte18i70" path="res://scenes/castle.tscn" id="3_hc4b7"]
 [ext_resource type="Texture2D" uid="uid://dpb62ctoglufa" path="res://assets/enemy_spawn_box.png" id="4_2v5i6"]
 [ext_resource type="Texture2D" uid="uid://db7x5p2fe3rry" path="res://assets/turret_spawn_box.png" id="5_8rerk"]
+[ext_resource type="AudioStream" uid="uid://dylm2hmo6pfpp" path="res://assets/sounds/background.wav" id="6_sorvj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5fy1"]
 size = Vector2(313, 593)
@@ -155,6 +156,9 @@ texture_filter = 1
 position = Vector2(57.5, 287.5)
 scale = Vector2(2.04687, 9.45313)
 texture = ExtResource("5_8rerk")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_sorvj")
 
 [connection signal="area_entered" from="Castle" to="." method="_on_castle_area_entered"]
 [connection signal="pressed" from="EnemySide/walker" to="." method="_on_walker_pressed"]

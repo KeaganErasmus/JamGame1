@@ -36,6 +36,10 @@ var can_spawn_turret: bool = false
 @onready var resource_label: Label = $ResourceLabel
 @onready var castle: Node = $Castle
 
+func _ready():
+	$AudioStreamPlayer2D.volume_db = -10
+	$AudioStreamPlayer2D.play()
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT and current_spawning != "none" and can_spawn_enemy:

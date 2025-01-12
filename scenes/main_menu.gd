@@ -1,5 +1,9 @@
 extends Node2D
 
+func _ready():
+	$AudioStreamPlayer2D.volume_db = -10
+	$AudioStreamPlayer2D.play()
+
 func _on_play_button_pressed():
 	get_tree().change_scene_to_file("res://world.tscn")
 
