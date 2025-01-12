@@ -41,6 +41,13 @@ func _ready():
 	$AudioStreamPlayer2D.play()
 
 func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		if not get_tree().paused:
+			get_tree().paused = true
+			var pause_meny = preload("res://scenes/pause_menu.tscn").instantiate()
+			add_child(pause_meny)
+		else:
+			get_tree().paused = false
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT and current_spawning != "none" and can_spawn_enemy:
 			spawn_enemy()

@@ -8,7 +8,7 @@ var cost: int
 var time_to_live: int
 
 var en_dir: int = 0
-var en_distance: int = 0
+var en_distance: float = 0
 var timer: float = 0
 var time_to_death: float = 0
 
