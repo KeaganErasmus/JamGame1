@@ -62,7 +62,7 @@ func find_nearest_enemy() -> Node:
 	return closest_enemy
 
 func create_heavy():
-	fire_rate = 1
+	fire_rate = 0.2
 	damage = 4
 	cost = 5
 	time_to_live = 3
@@ -95,7 +95,6 @@ func create_slow():
 func shoot(target, dt):
 	timer += dt
 	if timer > fire_rate:
-		#var target = find_nearest_enemy()
 		if target:
 			look_at(target.position)
 			sprite.play("shoot")
